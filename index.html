@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malla Curricular de Biología</title>
+    <style>
+        :root {
+            --primary-color: #e0f2f7; /* Azul muy claro, casi blanco */
+            --secondary-color: #b3e5fc; /* Azul claro */
+            --accent-color: #03a9f4; /* Azul brillante */
+            --text-color: #333;
+            --light-gray: #f0f0f0;
+            --dark-gray: #777;
+            --approved-color: #c8e6c9; /* Verde muy claro */
+            --blocked-color: #ffe0b2; /* Naranja muy claro */
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .curriculum-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .year-column {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .year-column:hover {
+            transform: translateY(-5px);
+        }
+
+        .year-title {
+            text-align: center;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        .trimester {
+            margin-bottom: 20px;
+        }
+
+        .trimester-title {
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .course-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .course-item {
+            background-color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            position: relative;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+        }
+
+        .course-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .course-item:hover:not(.approved):not(.locked) {
+            background-color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .course-item.approved {
+            background-color: var(--approved-color);
+            border-color: #81c784;
+            text-decoration: line-through;
+            color: var(--dark-gray);
+            cursor: default;
+        }
+
+        .course-item.locked {
+            background-color: var(--blocked-color);
+            border-color: #ffb74d;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .course-item.locked .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark-gray);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Posición encima del elemento */
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .course-item.locked:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .course-item.locked .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--dark-gray) transparent transparent transparent;
+        }
+
+        .course-checkbox {
+            margin-right: 10px;
+            min-width: 18px; /* Para asegurar que el checkbox siempre esté visible */
+            min-height: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .curriculum-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .year-column {
+                width: 90%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Malla Curricular: Carrera de Biología</h1>
+
+    <div class="curriculum-container" id="curriculumContainer">
+        </div>
+
+    <script>
+        const curriculum = {
+            "Ciclo Básico": {
+                "Trimestre 1": [
+                    { name: "Principios de Biología", id: "PB", requires: [] },
+                    { name: "Matemáticas 1", id: "M1", requires: [] },
+                    { name: "Lenguaje 1", id: "L1", requires: [] },
+                    { name: "Sociales 1", id: "S1", requires: [] }
+                ],
+                "Trimestre 2": [
+                    { name: "Matemáticas 2", id: "M2", requires: ["M1"] },
+                    { name: "Química General 1", id: "QG1", requires: [] },
+                    { name: "Lenguaje 2", id: "L2", requires: ["L1"] },
+                    { name: "Sociales 2", id: "S2", requires: ["S1"] }
+                ],
+                "Trimestre 3": [
+                    { name: "Matemáticas 3", id: "M3", requires: ["M2"] },
+                    { name: "Química General 2", id: "QG2", requires: ["QG1"] },
+                    { name: "Lab Química 1", id: "LQ1", requires: ["QG1"] },
+                    { name: "Lenguaje 3", id: "L3", requires: ["L2"] },
+                    { name: "Sociales 3", id: "S3", requires: ["S2"] }
+                ]
+            },
+            "Segundo Año": {
+                "Trimestre 4": [
+                    { name: "Organismos 1", id: "O1", requires: ["PB"] },
+                    { name: "Lab Organismos 1", id: "LO1", requires: ["PB"] },
+                    { name: "Matemáticas 4", id: "M4", requires: ["M3"] },
+                    { name: "Química Orgánica 1", id: "QO1", requires: ["QG2"] }
+                ],
+                "Trimestre 5": [
+                    { name: "Lab Organismos 2", id: "LO2", requires: ["LO1"] },
+                    { name: "Organismos 2", id: "O2", requires: ["O1"] },
+                    { name: "Física", id: "F1", requires: ["M1"] },
+                    { name: "Química Orgánica 2", id: "QO2", requires: ["QO1"] },
+                    { name: "Lab de Química 2", id: "LQ2", requires: ["LQ1"] }
+                ],
+                "Trimestre 6": [
+                    { name: "Lab Organismos 3", id: "LO3", requires: ["LO2"] },
+                    { name: "Organismos 3", id: "O3", requires: ["O2"] },
+                    { name: "Microbiología", id: "MB", requires: ["PB"] },
+                    { name: "Métodos Estadísticos 1", id: "ME1", requires: ["M3"] },
+                    { name: "Estudios Generales 1", id: "EG1", requires: [] }
+                ]
+            },
+            "Tercer Año": {
+                "Trimestre 7": [
+                    { name: "Genética General", id: "GG", requires: ["MB"] },
+                    { name: "Métodos Estadísticos 2", id: "ME2", requires: ["ME1"] },
+                    { name: "Bioquímica 1", id: "BQ1", requires: ["QO1"] },
+                    { name: "Inglés 1", id: "I1", requires: [] }
+                ],
+                "Trimestre 8": [
+                    { name: "Lab Genética General", id: "LGG", requires: ["GG"] },
+                    { name: "Física para Biólogos", id: "FB", requires: ["F1"] },
+                    { name: "Bioquímica 2", id: "BQ2", requires: ["BQ1"] },
+                    { name: "Lab Bioquímica", id: "LBQ", requires: ["QO1"] },
+                    { name: "Inglés 2", id: "I2", requires: ["I1"] }
+                ],
+                "Trimestre 9": [
+                    { name: "Ecología 1", id: "E1", requires: ["ME2"] },
+                    { name: "Evolución", id: "EV", requires: ["ME2"] },
+                    { name: "Elementos de Biofísica", id: "EB", requires: ["FB"] },
+                    { name: "Inglés 3", id: "I3", requires: ["I2"] },
+                    { name: "Estudios Generales 2", id: "EG2", requires: [] }
+                ]
+            },
+            "Cuarto Año": {
+                "Trimestre 10": [
+                    { name: "Ecología 2", id: "E2", requires: ["E1"] },
+                    { name: "Lab Ecología 1", id: "LE1", requires: ["E1"] },
+                    { name: "Fisiología Celular", id: "FC", requires: ["EB", "BQ1"] },
+                    { name: "Electiva 1", id: "EL1", requires: [] }
+                ],
+                "Trimestre 11": [
+                    { name: "Lab Ecología 2", id: "LE2", requires: ["LE1"] },
+                    { name: "Lab Fisiología Vegetal", id: "LFV", requires: ["FC"] },
+                    { name: "Fisiología Vegetal", id: "FV", requires: ["FC"] },
+                    { name: "Estudios Generales 3", id: "EG3", requires: [] }
+                ],
+                "Trimestre 12": [
+                    { name: "Fisiología Animal", id: "FA", requires: ["FC"] },
+                    { name: "Lab Fisiología Animal", id: "LFA", requires: ["FC"] },
+                    { name: "Electiva 2", id: "EL2", requires: [] },
+                    { name: "Estudios Generales 4", id: "EG4", requires: [] }
+                ]
+            },
+            "Quinto Año": {
+                "Trimestre 13": [
+                    { name: "Proyecto de Grado 1", id: "PG1", requires: [] },
+                    { name: "Seminario", id: "S", requires: [] },
+                    { name: "Electiva 3", id: "EL3", requires: [] },
+                    { name: "Electiva 4", id: "EL4", requires: [] }
+                ],
+                "Trimestre 14": [
+                    { name: "Proyecto de Grado 2", id: "PG2", requires: ["PG1"] },
+                    { name: "Electiva 5", id: "EL5", requires: [] },
+                    { name: "Estudios Generales 5", id: "EG5", requires: [] }
+                ],
+                "Trimestre 15": [
+                    { name: "Proyecto de Grado 3", id: "PG3", requires: ["PG2"] },
+                    { name: "Electiva 6", id: "EL6", requires: [] },
+                    { name: "Estudios Generales 6", id: "EG6", requires: [] }
+                ]
+            }
+        };
+
+        let approvedCourses = JSON.parse(localStorage.getItem('approvedCourses')) || [];
+
+        const curriculumContainer = document.getElementById('curriculumContainer');
+
+        function renderCurriculum() {
+            curriculumContainer.innerHTML = ''; // Limpiar el contenedor antes de renderizar
+
+            for (const year in curriculum) {
+                const yearColumn = document.createElement('div');
+                yearColumn.classList.add('year-column');
+
+                const yearTitle = document.createElement('h2');
+                yearTitle.classList.add('year-title');
+                yearTitle.textContent = year;
+                yearColumn.appendChild(yearTitle);
+
+                for (const trimester in curriculum[year]) {
+                    const trimesterDiv = document.createElement('div');
+                    trimesterDiv.classList.add('trimester');
+
+                    const trimesterTitle = document.createElement('h3');
+                    trimesterTitle.classList.add('trimester-title');
+                    trimesterTitle.textContent = trimester;
+                    trimesterDiv.appendChild(trimesterTitle);
+
+                    const courseList = document.createElement('ul');
+                    courseList.classList.add('course-list');
+
+                    curriculum[year][trimester].forEach(course => {
+                        const courseItem = document.createElement('li');
+                        courseItem.classList.add('course-item');
+                        courseItem.dataset.id = course.id;
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.classList.add('course-checkbox');
+                        checkbox.checked = approvedCourses.includes(course.id);
+                        checkbox.disabled = isCourseLocked(course);
+
+                        if (checkbox.checked) {
+                            courseItem.classList.add('approved');
+                        } else if (checkbox.disabled) {
+                            courseItem.classList.add('locked');
+                            const tooltip = document.createElement('span');
+                            tooltip.classList.add('tooltip-text');
+                            tooltip.textContent = `Requiere: ${getMissingRequirements(course).join(', ')}`;
+                            courseItem.appendChild(tooltip);
+                        }
+
+                        courseItem.appendChild(checkbox);
+                        courseItem.innerHTML += course.name; // Agregamos el nombre de la materia después del checkbox
+
+                        courseItem.addEventListener('click', (event) => {
+                            // Prevenir que el click en el LI toggle el checkbox si ya se clickeó el checkbox
+                            if (event.target === checkbox) {
+                                toggleCourse(course.id);
+                            } else {
+                                checkbox.checked = !checkbox.checked;
+                                toggleCourse(course.id);
+                            }
+                        });
+
+                        courseList.appendChild(courseItem);
+                    });
+                    trimesterDiv.appendChild(courseList);
+                    yearColumn.appendChild(trimesterDiv);
+                }
+                curriculumContainer.appendChild(yearColumn);
+            }
+        }
+
+        function isCourseLocked(course) {
+            return course.requires.some(reqId => !approvedCourses.includes(reqId));
+        }
+
+        function getMissingRequirements(course) {
+            return course.requires.filter(reqId => !approvedCourses.includes(reqId))
+                                 .map(reqId => getCourseNameById(reqId));
+        }
+
+        function getCourseNameById(id) {
+            for (const year in curriculum) {
+                for (const trimester in curriculum[year]) {
+                    const foundCourse = curriculum[year][trimester].find(course => course.id === id);
+                    if (foundCourse) {
+                        return foundCourse.name;
+                    }
+                }
+            }
+            return id; // En caso de no encontrar el ID (debería ser raro)
+        }
+
+        function toggleCourse(courseId) {
+            const courseItem = document.querySelector(`.course-item[data-id="${courseId}"]`);
+            const checkbox = courseItem.querySelector('.course-checkbox');
+
+            if (checkbox.checked) {
+                // Check if the course is locked before allowing approval
+                const course = findCourseById(courseId);
+                if (isCourseLocked(course)) {
+                    checkbox.checked = false; // Revert checkbox state
+                    alert(`No puedes aprobar ${course.name} hasta completar sus requisitos: ${getMissingRequirements(course).join(', ')}`);
+                    return;
+                }
+                approvedCourses.push(courseId);
+                courseItem.classList.add('approved');
+                courseItem.classList.remove('locked');
+                const tooltip = courseItem.querySelector('.tooltip-text');
+                if (tooltip) tooltip.remove();
+            } else {
+                // Check if any subsequent course depends on this one
+                const dependentCourses = findDependentCourses(courseId);
+                const approvedDependentCourses = dependentCourses.filter(depCourseId => approvedCourses.includes(depCourseId));
+
+                if (approvedDependentCourses.length > 0) {
+                    const dependentNames = approvedDependentCourses.map(id => getCourseNameById(id)).join(', ');
+                    checkbox.checked = true; // Revert checkbox state
+                    alert(`No puedes desaprobar ${getCourseNameById(courseId)} porque las siguientes materias dependen de ella y ya están aprobadas: ${dependentNames}`);
+                    return;
+                }
+
+                approvedCourses = approvedCourses.filter(id => id !== courseId);
+                courseItem.classList.remove('approved');
+            }
+
+            localStorage.setItem('approvedCourses', JSON.stringify(approvedCourses));
+            renderCurriculum(); // Volver a renderizar para actualizar el estado de bloqueo
+        }
+
+        function findCourseById(id) {
+            for (const year in curriculum) {
+                for (const trimester in curriculum[year]) {
+                    const course = curriculum[year][trimester].find(c => c.id === id);
+                    if (course) return course;
+                }
+            }
+            return null;
+        }
+
+        function findDependentCourses(courseId) {
+            const dependents = [];
+            for (const year in curriculum) {
+                for (const trimester in curriculum[year]) {
+                    curriculum[year][trimester].forEach(course => {
+                        if (course.requires.includes(courseId)) {
+                            dependents.push(course.id);
+                        }
+                    });
+                }
+            }
+            return dependents;
+        }
+
+
+        // Renderizar la malla al cargar la página
+        document.addEventListener('DOMContentLoaded', renderCurriculum);
+    </script>
+</body>
+</html>
