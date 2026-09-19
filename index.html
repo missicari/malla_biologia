@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malla Curricular de ingenieria civil</title>
+    <title>Malla Curricular de Biología</title>
     <style>
         :root {
             --primary-color: #e0f2f7; /* Azul muy claro, casi blanco */
@@ -176,141 +176,117 @@
     </style>
 </head>
 <body>
-    <h1>Malla Curricular: Carrera de ingenieria civil</h1>
+    <h1>Malla Curricular: Carrera de Biología</h1>
 
     <div class="curriculum-container" id="curriculumContainer">
         </div>
 
     <script>
-        const pensumIngenieriaCivil = [
-  // --- PRIMER SEMESTRE ---[span_4](start_span)[span_4](end_span)
-  {
-    semestre: 1,
-    totalUC: 19,
-    asignaturas: [
-      { cod: "0251", nombre: "CALCULO I", requisitos: [], uni: 5 },
-      { cod: "0331", nombre: "FISICA GENERAL I", requisitos: [], uni: 5 },
-      { cod: "0551", nombre: "GEOMETRIA DESCRIPTIVA I", requisitos: [], uni: 5 },
-      { cod: "0012", nombre: "INTRODUCCION A LA INGENIERIA", requisitos: [], uni: 2 },
-      { cod: "0183", nombre: "LENGUA Y COMUNICACION", requisitos: [], uni: 2 }
-    ]
-  },
-  // --- SEGUNDO SEMESTRE ---[span_5](start_span)[span_5](end_span)
-  {
-    semestre: 2,
-    totalUC: 20,
-    asignaturas: [
-      { cod: "0252", nombre: "CALCULO II", requisitos: ["0251"], uni: 5 },
-      { cod: "0334", nombre: "LABORATORIO DE FISICA GENERAL", requisitos: ["0331"], uni: 1 },
-      { cod: "0552", nombre: "GEOMETRIA DESCRIPTIVA II", requisitos: ["0551"], uni: 4 },
-      { cod: "0333", nombre: "TOPICOS DE FISICA GENERAL", requisitos: ["0331", "0251"], uni: 4 },
-      { cod: "0250", nombre: "ALGEBRA LINEAL Y GEOMETRIA", requisitos: ["0251"], uni: 4 },
-      { cod: "E-SH1", nombre: "ELECTIVA SOCIO-HUMANISTICA", requisitos: [], uni: 2 }
-    ]
-  },
-  // --- TERCER SEMESTRE ---[span_6](start_span)[span_6](end_span)
-  {
-    semestre: 3,
-    totalUC: 20,
-    asignaturas: [
-      { cod: "0253", nombre: "CALCULO III", requisitos: ["0252"], uni: 5 },
-      { cod: "0602", nombre: "MECANICA APLICADA", requisitos: ["0252", "0331"], uni: 4 },
-      { cod: "0515", nombre: "DIBUJO DE PROYECTOS", requisitos: ["0552", "0012"], uni: 2 },
-      { cod: "1265", nombre: "TOPOGRAFIA", requisitos: ["0552", "0252"], uni: 5 },
-      { cod: "1170", nombre: "INFORMATICA PARA INGENIEROS", requisitos: ["0250"], uni: 2 },
-      { cod: "E-SH2", nombre: "ELECTIVA SOCIO-HUMANISTICA", requisitos: [], uni: 2 }
-    ]
-  },
-  // --- CUARTO SEMESTRE ---[span_7](start_span)[span_7](end_span)
-  {
-    semestre: 4,
-    totalUC: 19,
-    asignaturas: [
-      { cod: "0256", nombre: "ECUACIONES DIFERENCIALES", requisitos: ["0250", "0253"], uni: 5 },
-      { cod: "1160", nombre: "ESTATICA APLICADA", requisitos: ["0602"], uni: 4 },
-      { cod: "1765", nombre: "ESTADISTICA PARA INGENIEROS", requisitos: ["0253"], uni: 3 },
-      { cod: "1266", nombre: "TOPOGRAFIA APLICADA A OBRAS CIVILES", requisitos: ["1265", "0515"], uni: 2 },
-      { cod: "1460", nombre: "QUIMICA BASICA", requisitos: ["50 uc"], uni: 3 },
-      { cod: "0254", nombre: "CALCULO VECTORIAL", requisitos: ["0250", "0253"], uni: 2 }
-    ]
-  },
-  // --- QUINTO SEMESTRE ---[span_8](start_span)[span_8](end_span)
-  {
-    semestre: 5,
-    totalUC: 19,
-    asignaturas: [
-      { cod: "1161", nombre: "RESISTENCIA DE MATERIALES", requisitos: ["1160", "0254", "0256"], uni: 5 },
-      { cod: "1367", nombre: "MECANICA DE FLUIDOS", requisitos: ["0602"], uni: 4 },
-      { cod: "1468", nombre: "QUIMICA APLICADA", requisitos: ["1460"], uni: 4 },
-      { cod: "1766", nombre: "HIDROLOGIA", requisitos: ["0256"], uni: 4 },
-      { cod: "3100", nombre: "GEOLOGIA PARA INGENIEROS", requisitos: ["1266"], uni: 2 }
-    ]
-  },
-  // --- SEXTO SEMESTRE ---[span_9](start_span)[span_9](end_span)
-  {
-    semestre: 6,
-    totalUC: 19,
-    asignaturas: [
-      { cod: "1162", nombre: "TECNOLOGIA DEL CONCRETO", requisitos: ["1765", "1161", "1468"], uni: 4 },
-      { cod: "1163", nombre: "ESTRUCTURAS", requisitos: ["1161"], uni: 6 },
-      { cod: "1463", nombre: "HOMBRE INGENIERIA Y AMBIENTE", requisitos: ["90 uc"], uni: 3 },
-      { cod: "1560", nombre: "MECANICA DE SUELOS I", requisitos: ["3100", "1161", "1367"], uni: 3 },
-      { cod: "1368", nombre: "LABORATORIO DE FLUIDOS", requisitos: ["1367"], uni: 1 },
-      { cod: "0111", nombre: "INGLES INSTRUMENTAL (Civil)", requisitos: ["80 uc"], uni: 2 }
-    ]
-  },
-  // --- SEPTIMO SEMESTRE ---[span_10](start_span)[span_10](end_span)
-  {
-    semestre: 7,
-    totalUC: 22,
-    asignaturas: [
-      { cod: "1164", nombre: "CONCRETO ARMADO", requisitos: ["1163", "1162", "0515"], uni: 5 },
-      { cod: "1366", nombre: "HIDRAULICA", requisitos: ["1367", "1368"], uni: 4 },
-      { cod: "1464", nombre: "SANEAMIENTO AMBIENTAL", requisitos: ["1463"], uni: 4 },
-      { cod: "1561", nombre: "MECANICA DE SUELOS II", requisitos: ["1560"], uni: 5 },
-      { cod: "1563", nombre: "PROYECTOS VIALES I", requisitos: ["1766", "3100"], uni: 4 }
-    ]
-  },
-  // --- OCTAVO SEMESTRE ---[span_11](start_span)[span_11](end_span)
-  {
-    semestre: 8,
-    totalUC: 21,
-    asignaturas: [
-      { cod: "1165", nombre: "PROYECTOS ESTRUCTURALES DE CONCRETO ARMADO", requisitos: ["1164", "0111"], uni: 5 },
-      { cod: "1465", nombre: "SISTEMAS DE ABASTECIMIENTO", requisitos: ["1366", "1464"], uni: 3 },
-      { cod: "1564", nombre: "PROYECTOS VIALES II", requisitos: ["1563"], uni: 4 },
-      { cod: "SEL-A1", nombre: "SELECTIVA A-1", requisitos: [], uni: 3 },
-      { cod: "SEL-B1", nombre: "SELECTIVA B-1", requisitos: [], uni: 3 },
-      { cod: "SEL-C1", nombre: "SELECTIVA C-1", requisitos: [], uni: 3 }
-    ]
-  },
-  // --- NOVENO SEMESTRE ---[span_12](start_span)[span_12](end_span)
-  {
-    semestre: 9,
-    totalUC: 20,
-    asignaturas: [
-      { cod: "0088", nombre: "METODOLOGIA DE LA INVESTIGACION (Civil)", requisitos: ["140 uc"], uni: 4 },
-      { cod: "1466", nombre: "CLOACAS Y DRENAJES", requisitos: ["1465"], uni: 3 },
-      { cod: "1562", nombre: "INFRAESTRUCTURA VIAL", requisitos: ["1564", "1561"], uni: 4 },
-      { cod: "SEL-A2", nombre: "SELECTIVA A-2", requisitos: [], uni: 3 },
-      { cod: "SEL-B2", nombre: "SELECTIVA B-2", requisitos: [], uni: 3 },
-      { cod: "SEL-C2", nombre: "SELECTIVA C-2", requisitos: [], uni: 3 }
-    ]
-  },
-  // --- DECIMO SEMESTRE ---[span_13](start_span)[span_13](end_span)
-  {
-    semestre: 10,
-    totalUC: 20,
-    asignaturas: [
-      { cod: "1010", nombre: "TRABAJO DE GRADO", requisitos: ["0088"], uni: 4 },
-      { cod: "1166", nombre: "ESTRUCTURAS DE ACERO", requisitos: ["1163"], uni: 4 },
-      { cod: "1467", nombre: "INSTALACIONES PARA EDIFICIOS", requisitos: ["140 uc"], uni: 3 },
-      { cod: "SEL-A3", nombre: "SELECTIVA A-3", requisitos: [], uni: 3 },
-      { cod: "SEL-B3", nombre: "SELECTIVA B-3", requisitos: [], uni: 3 },
-      { cod: "SEL-C3", nombre: "SELECTIVA C-3", requisitos: [], uni: 3 }
-    ]
-  }
-];
+        const curriculum = {
+            "Ciclo Básico": {
+                "Trimestre 1": [
+                    { name: "Principios de Biología", id: "PB", requires: [] },
+                    { name: "Matemáticas 1", id: "M1", requires: [] },
+                    { name: "Lenguaje 1", id: "L1", requires: [] },
+                    { name: "Sociales 1", id: "S1", requires: [] }
+                ],
+                "Trimestre 2": [
+                    { name: "Matemáticas 2", id: "M2", requires: ["M1"] },
+                    { name: "Química General 1", id: "QG1", requires: [] },
+                    { name: "Lenguaje 2", id: "L2", requires: ["L1"] },
+                    { name: "Sociales 2", id: "S2", requires: ["S1"] }
+                ],
+                "Trimestre 3": [
+                    { name: "Matemáticas 3", id: "M3", requires: ["M2"] },
+                    { name: "Química General 2", id: "QG2", requires: ["QG1"] },
+                    { name: "Lab Química 1", id: "LQ1", requires: ["QG1"] },
+                    { name: "Lenguaje 3", id: "L3", requires: ["L2"] },
+                    { name: "Sociales 3", id: "S3", requires: ["S2"] }
+                ]
+            },
+            "Segundo Año": {
+                "Trimestre 4": [
+                    { name: "Organismos 1", id: "O1", requires: ["PB"] },
+                    { name: "Lab Organismos 1", id: "LO1", requires: ["PB"] },
+                    { name: "Matemáticas 4", id: "M4", requires: ["M3"] },
+                    { name: "Química Orgánica 1", id: "QO1", requires: ["QG2"] }
+                ],
+                "Trimestre 5": [
+                    { name: "Lab Organismos 2", id: "LO2", requires: ["LO1"] },
+                    { name: "Organismos 2", id: "O2", requires: ["O1"] },
+                    { name: "Física", id: "F1", requires: ["M1"] },
+                    { name: "Química Orgánica 2", id: "QO2", requires: ["QO1"] },
+                    { name: "Lab de Química 2", id: "LQ2", requires: ["LQ1"] }
+                ],
+                "Trimestre 6": [
+                    { name: "Lab Organismos 3", id: "LO3", requires: ["LO2"] },
+                    { name: "Organismos 3", id: "O3", requires: ["O2"] },
+                    { name: "Microbiología", id: "MB", requires: ["PB"] },
+                    { name: "Métodos Estadísticos 1", id: "ME1", requires: ["M3"] },
+                    { name: "Estudios Generales 1", id: "EG1", requires: [] }
+                ]
+            },
+            "Tercer Año": {
+                "Trimestre 7": [
+                    { name: "Genética General", id: "GG", requires: ["MB"] },
+                    { name: "Métodos Estadísticos 2", id: "ME2", requires: ["ME1"] },
+                    { name: "Bioquímica 1", id: "BQ1", requires: ["QO1"] },
+                    { name: "Inglés 1", id: "I1", requires: [] }
+                ],
+                "Trimestre 8": [
+                    { name: "Lab Genética General", id: "LGG", requires: ["GG"] },
+                    { name: "Física para Biólogos", id: "FB", requires: ["F1"] },
+                    { name: "Bioquímica 2", id: "BQ2", requires: ["BQ1"] },
+                    { name: "Lab Bioquímica", id: "LBQ", requires: ["QO1"] },
+                    { name: "Inglés 2", id: "I2", requires: ["I1"] }
+                ],
+                "Trimestre 9": [
+                    { name: "Ecología 1", id: "E1", requires: ["ME2"] },
+                    { name: "Evolución", id: "EV", requires: ["ME2"] },
+                    { name: "Elementos de Biofísica", id: "EB", requires: ["FB"] },
+                    { name: "Inglés 3", id: "I3", requires: ["I2"] },
+                    { name: "Estudios Generales 2", id: "EG2", requires: [] }
+                ]
+            },
+            "Cuarto Año": {
+                "Trimestre 10": [
+                    { name: "Ecología 2", id: "E2", requires: ["E1"] },
+                    { name: "Lab Ecología 1", id: "LE1", requires: ["E1"] },
+                    { name: "Fisiología Celular", id: "FC", requires: ["EB", "BQ1"] },
+                    { name: "Electiva 1", id: "EL1", requires: [] }
+                ],
+                "Trimestre 11": [
+                    { name: "Lab Ecología 2", id: "LE2", requires: ["LE1"] },
+                    { name: "Lab Fisiología Vegetal", id: "LFV", requires: ["FC"] },
+                    { name: "Fisiología Vegetal", id: "FV", requires: ["FC"] },
+                    { name: "Estudios Generales 3", id: "EG3", requires: [] }
+                ],
+                "Trimestre 12": [
+                    { name: "Fisiología Animal", id: "FA", requires: ["FC"] },
+                    { name: "Lab Fisiología Animal", id: "LFA", requires: ["FC"] },
+                    { name: "Electiva 2", id: "EL2", requires: [] },
+                    { name: "Estudios Generales 4", id: "EG4", requires: [] }
+                ]
+            },
+            "Quinto Año": {
+                "Trimestre 13": [
+                    { name: "Proyecto de Grado 1", id: "PG1", requires: [] },
+                    { name: "Seminario", id: "S", requires: [] },
+                    { name: "Electiva 3", id: "EL3", requires: [] },
+                    { name: "Electiva 4", id: "EL4", requires: [] }
+                ],
+                "Trimestre 14": [
+                    { name: "Proyecto de Grado 2", id: "PG2", requires: ["PG1"] },
+                    { name: "Electiva 5", id: "EL5", requires: [] },
+                    { name: "Estudios Generales 5", id: "EG5", requires: [] }
+                ],
+                "Trimestre 15": [
+                    { name: "Proyecto de Grado 3", id: "PG3", requires: ["PG2"] },
+                    { name: "Electiva 6", id: "EL6", requires: [] },
+                    { name: "Estudios Generales 6", id: "EG6", requires: [] }
+                ]
+            }
+        };
 
         let approvedCourses = JSON.parse(localStorage.getItem('approvedCourses')) || [];
 
@@ -330,17 +306,17 @@
 
                 for (const trimester in curriculum[year]) {
                     const trimesterDiv = document.createElement('div');
-                    trimesterDiv.classList.add('semester');
+                    trimesterDiv.classList.add('trimester');
 
                     const trimesterTitle = document.createElement('h3');
-                    trimesterTitle.classList.add('semester-title');
-                    trimesterTitle.textContent = semester;
-                    trimesterDiv.appendChild(semesterTitle);
+                    trimesterTitle.classList.add('trimester-title');
+                    trimesterTitle.textContent = trimester;
+                    trimesterDiv.appendChild(trimesterTitle);
 
                     const courseList = document.createElement('ul');
                     courseList.classList.add('course-list');
 
-                    curriculum[year][semester].forEach(course => {
+                    curriculum[year][trimester].forEach(course => {
                         const courseItem = document.createElement('li');
                         courseItem.classList.add('course-item');
                         courseItem.dataset.id = course.id;
@@ -376,7 +352,7 @@
 
                         courseList.appendChild(courseItem);
                     });
-                    semesterDiv.appendChild(courseList);
+                    trimesterDiv.appendChild(courseList);
                     yearColumn.appendChild(trimesterDiv);
                 }
                 curriculumContainer.appendChild(yearColumn);
@@ -395,7 +371,7 @@
         function getCourseNameById(id) {
             for (const year in curriculum) {
                 for (const trimester in curriculum[year]) {
-                    const foundCourse = curriculum[year][semster].find(course => course.id === id);
+                    const foundCourse = curriculum[year][trimester].find(course => course.id === id);
                     if (foundCourse) {
                         return foundCourse.name;
                     }
@@ -444,7 +420,7 @@
         function findCourseById(id) {
             for (const year in curriculum) {
                 for (const trimester in curriculum[year]) {
-                    const course = curriculum[year][semester].find(c => c.id === id);
+                    const course = curriculum[year][trimester].find(c => c.id === id);
                     if (course) return course;
                 }
             }
@@ -455,7 +431,7 @@
             const dependents = [];
             for (const year in curriculum) {
                 for (const trimester in curriculum[year]) {
-                    curriculum[year][semester].forEach(course => {
+                    curriculum[year][trimester].forEach(course => {
                         if (course.requires.includes(courseId)) {
                             dependents.push(course.id);
                         }
